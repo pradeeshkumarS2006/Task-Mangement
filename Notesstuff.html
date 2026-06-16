@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book and movie  reffer</title>
+    <title>Task Management</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -17,17 +17,14 @@
 
     
 
-    <h1>NOTES STUFF📚</h1>
+    <h1>TASKS📚</h1>
     </div>
 
     <div class = "container">
         <div class = "book-container">
-            <h2>Inception</h2>
-            <h3>Christopernolan</h3>
-             <p>Dreams within dreams, a layered maze,  
-          heist of thoughts where reality slips,  
-             Inception sails on subconscious trips.  
-                    Would you like me to craft more of these in different styles—like a darker, philosophical tone or a lighter, poetic one? </p>
+            <h2>Sample Task</h2>
+            <h3>15-06-2026</h3>
+             <p>This is a demo task card </p>
                 <button onclick = "deletebook(event)">Delete</button>
         </div>
         
@@ -38,10 +35,10 @@
          <div class = "popup-box">
              <h2>Add Book</h2>
              <form>
-                <input type = "text" placeholder = "Book Title" id = "book-title-input">
-                <input type = "text" placeholder="Book Author" id = "book-author-input">
-                <textarea placeholder="Short Description" id = "book-description-input"></textarea>
-                <button id = "add-book">ADD</button>
+                <input type = "text" placeholder = "Task Title" id = "task-title-input">
+                <input type = "date" id = "task-date-input">
+                <textarea placeholder=" Description" id = "task-description-input"></textarea>
+                <button id = "add-task">ADD</button>
                 <button id = "canccel-popup">CANCEL</button>
              </form>
          </div>
