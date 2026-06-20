@@ -1,33 +1,150 @@
-# Task Management App
+📚 Task Management App — Full Stack
+A full-stack task management application with secure authentication, a Java Spring Boot REST API, MySQL persistence, and real-time sync across devices via WebSocket.
 
-A simple and responsive Task Management web app built with HTML, CSS, and JavaScript. Users can add, edit, and delete tasks to keep track of their daily to-dos — all running directly in the browser with no backend required.
+Live demo (frontend): https://pradeeshkumars2006.github.io/Task-Mangement/ Source code: this repository
 
-## Features
 
-- ➕ Add new tasks
-- ✏️ Edit existing tasks
-- 🗑️ Delete tasks
-- 📱 Responsive design for mobile and desktop
+✨ Features
+🔐 User authentication — signup & login with JWT, passwords hashed with BCrypt
+⚙️ Backend REST API — built with Java Spring Boot 3
+🗄️ Database integration — MySQL via Spring Data JPA / Hibernate
+⚡ Real-time sync — WebSocket (STOMP over SockJS); tasks update instantly across every open tab/device for the same account
+🎨 Clean UI/UX — minimal card-based design, no clutter
+📱 Mobile responsive — fluid layout, tested down to 360px width
+📄 Documented & ready to deploy
 
-## Tech Stack
 
-- HTML5
-- CSS3
-- JavaScript (Vanilla)
+🏗️ Architecture
+Browser (HTML/CSS/JS, GitHub Pages)
 
-## Live Demo
+        │  REST (fetch) + WebSocket (STOMP/SockJS)
 
-🔗 [View Live Site](https://pradeeshkumars2006.github.io/Task-Mangement/)
+        ▼
 
-## How to Run Locally
+Spring Boot API  ── JWT filter ── Spring Security
 
-1. Clone the repository
-```bash
-   git clone https://github.com/pradeeshkumarS2006/Task-Mangement.git
-```
-2. Open `index.html` in your browser
+        │
 
-## Author
+        ▼
 
-**Pradeesh Kumar S**
-[GitHub](https://github.com/pradeeshkumarS2006) | 
+   MySQL Database
+
+Layer
+Technology
+Frontend
+HTML5, CSS3, Vanilla JS, SockJS + STOMP.js
+Backend
+Java 17, Spring Boot 3 (Web, Security, JPA, WebSocket)
+Auth
+JWT (jjwt), BCrypt password hashing
+Database
+MySQL 8
+Real-time
+STOMP over WebSocket (SockJS fallback)
+
+
+
+📁 Project Structure
+task-management-fullstack/
+
+├── backend/
+
+│   ├── pom.xml
+
+│   └── src/main/java/com/pradeesh/taskmanager/
+
+│       ├── TaskManagerApplication.java
+
+│       ├── config/        (SecurityConfig, WebSocketConfig)
+
+│       ├── security/      (JwtUtil, JwtAuthFilter)
+
+│       ├── model/         (User, Task)
+
+│       ├── repository/    (UserRepository, TaskRepository)
+
+│       ├── dto/           (RegisterRequest, LoginRequest, AuthResponse, TaskDto)
+
+│       ├── service/       (UserDetailsServiceImpl)
+
+│       └── controller/    (AuthController, TaskController)
+
+└── frontend/
+
+    ├── index.html
+
+    ├── login.html
+
+    ├── signup.html
+
+    ├── dashboard.html
+
+    ├── css/style.css
+
+    └── js/ (api.js, dashboard.js)
+
+
+🚀 Getting Started
+1. Database
+Create a MySQL database:
+
+CREATE DATABASE taskmanager_db;
+2. Backend
+Edit backend/src/main/resources/application.properties with your MySQL username/password, then:
+
+cd backend
+
+mvn spring-boot:run
+
+The API starts on http://localhost:8080. Tables are auto-created by Hibernate on first run.
+3. Frontend
+Open frontend/login.html in a browser (or serve the folder with any static server / GitHub Pages). By default it calls the API at http://localhost:8080/api — update API_BASE_URL in js/api.js once you deploy the backend (e.g. Render, Railway) to point at the live URL.
+
+
+🔌 API Reference
+Method
+Endpoint
+Auth required
+Description
+POST
+/api/auth/signup
+No
+Register a new user
+POST
+/api/auth/login
+No
+Log in, returns JWT
+GET
+/api/tasks
+Yes
+List the logged-in user's tasks
+POST
+/api/tasks
+Yes
+Create a task
+PUT
+/api/tasks/{id}
+Yes
+Update a task
+DELETE
+/api/tasks/{id}
+Yes
+Delete a task
+
+
+Send the JWT as Authorization: Bearer <token> on every /api/tasks/** request.
+
+Real-time channel: connect via SockJS to /ws, subscribe to /topic/tasks/{userEmail} to receive live CREATED / UPDATED / DELETED events.
+
+
+🛣️ Roadmap / Ideas for extension
+Task priorities & categories/tags
+Email reminders for due dates
+Shared/team task lists
+Dark mode
+Deploy backend to Render + frontend already on GitHub Pages
+
+
+👤 Author
+Pradeesh Kumar S — B.Sc Computer Science, SRM Arts and Science College GitHub: @pradeeshkumarS2006
+
